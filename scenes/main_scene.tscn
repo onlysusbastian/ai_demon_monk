@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bsa7qj2lsvqmt"]
+
+[ext_resource type="PackedScene" uid="uid://bq8r4x2j5a8ua" path="res://scenes/demon.tscn" id="1_w2twt"]
+
+[node name="main" type="Node2D" unique_id=651498797]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1146457941]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="demon" parent="." unique_id=1968173147 instance=ExtResource("1_w2twt")]
+position = Vector2(951, 650)
