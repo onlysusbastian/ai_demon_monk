@@ -1,13 +1,99 @@
 [gd_scene format=3 uid="uid://bsa7qj2lsvqmt"]
 
-[ext_resource type="PackedScene" uid="uid://bq8r4x2j5a8ua" path="res://scenes/demon.tscn" id="1_w2twt"]
+[ext_resource type="Script" uid="uid://fhoia8t6oqec" path="res://scripts/main_logic.gd" id="1_pw63i"]
+[ext_resource type="PackedScene" uid="uid://bq8r4x2j5a8ua" path="res://scenes/monk.tscn" id="1_w2twt"]
+[ext_resource type="Texture2D" uid="uid://bj0dgb2o8ayf" path="res://icon.svg" id="3_7ykc4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw63i"]
+size = Vector2(592.5, 508)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gubc5"]
+size = Vector2(374, 164.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rt2n2"]
+size = Vector2(408.5, 193.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ykc4"]
+size = Vector2(119.5, 75.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pu3yx"]
+size = Vector2(110.5, 42.125)
 
 [node name="main" type="Node2D" unique_id=651498797]
+script = ExtResource("1_pw63i")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1146457941]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
-[node name="demon" parent="." unique_id=1968173147 instance=ExtResource("1_w2twt")]
-position = Vector2(951, 650)
+[node name="environmen" type="Node2D" parent="." unique_id=273982081]
+
+[node name="left_land" type="StaticBody2D" parent="environmen" unique_id=682464746]
+
+[node name="Icon" type="Sprite2D" parent="environmen/left_land" unique_id=2141633630]
+position = Vector2(1621.5, 821.25)
+scale = Vector2(4.6328125, 4.0273438)
+texture = ExtResource("3_7ykc4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environmen/left_land" unique_id=1862889514]
+position = Vector2(1623.25, 821)
+shape = SubResource("RectangleShape2D_pw63i")
+
+[node name="left_spawn" type="Area2D" parent="environmen/left_land" unique_id=112413124]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environmen/left_land/left_spawn" unique_id=207397420]
+position = Vector2(343, 442.25)
+shape = SubResource("RectangleShape2D_gubc5")
+
+[node name="right_land" type="StaticBody2D" parent="environmen" unique_id=1732598824]
+
+[node name="Icon" type="Sprite2D" parent="environmen/right_land" unique_id=1761023532]
+position = Vector2(309.50003, 816)
+scale = Vector2(4.6640615, 4.0273438)
+texture = ExtResource("3_7ykc4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environmen/right_land" unique_id=1676152287]
+position = Vector2(302, 816)
+shape = SubResource("RectangleShape2D_pw63i")
+
+[node name="right_spawn" type="Area2D" parent="environmen/right_land" unique_id=2113823860]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="environmen/right_land/right_spawn" unique_id=1089861351]
+position = Vector2(1613, 422)
+shape = SubResource("RectangleShape2D_rt2n2")
+
+[node name="land_area" type="Node2D" parent="." unique_id=1726970630]
+
+[node name="boat" type="Node2D" parent="." unique_id=216346444]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="boat" unique_id=1029135017]
+
+[node name="Icon" type="Sprite2D" parent="boat/CharacterBody2D" unique_id=468999437]
+position = Vector2(1263, 588.5)
+scale = Vector2(1, 0.6171875)
+texture = ExtResource("3_7ykc4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boat/CharacterBody2D" unique_id=958535653]
+position = Vector2(1261, 588)
+shape = SubResource("RectangleShape2D_7ykc4")
+
+[node name="boat_body" type="Area2D" parent="boat/CharacterBody2D" unique_id=669501827]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boat/CharacterBody2D/boat_body" unique_id=356655784]
+position = Vector2(1263, 535)
+shape = SubResource("RectangleShape2D_pu3yx")
+
+[node name="characters" type="Node2D" parent="." unique_id=1531685562]
+
+[node name="demon" parent="characters" unique_id=1968173147 instance=ExtResource("1_w2twt")]
+position = Vector2(1570, 547)
+
+[node name="Button2" type="Button" parent="characters/demon" unique_id=49447973]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="body_entered" from="environmen/left_land/left_spawn" to="." method="_on_left_spawn_body_entered"]
+[connection signal="body_entered" from="environmen/right_land/right_spawn" to="." method="_on_right_spawn_body_entered"]
+[connection signal="body_entered" from="boat/CharacterBody2D/boat_body" to="." method="_on_boat_body_body_entered"]
+[connection signal="body_exited" from="boat/CharacterBody2D/boat_body" to="." method="_on_boat_body_body_exited"]
