@@ -1,23 +1,20 @@
 [gd_scene format=3 uid="uid://bq8r4x2j5a8ua"]
 
-[ext_resource type="Texture2D" uid="uid://bj0dgb2o8ayf" path="res://icon.svg" id="1_ye80u"]
+[ext_resource type="Script" uid="uid://cvgelrqw1ns0k" path="res://scripts/demon.gd" id="1_ye80u"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3t42y"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3t42y"]
 size = Vector2(116, 119)
 
 [node name="demon" type="CharacterBody2D" unique_id=1968173147]
+script = ExtResource("1_ye80u")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=537570954]
 position = Vector2(0, -62)
-texture = ExtResource("1_ye80u")
+texture = SubResource("CompressedTexture2D_3t42y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=544055841]
-position = Vector2(0, -61.5)
+position = Vector2(1, -63)
 shape = SubResource("RectangleShape2D_3t42y")
-
-[node name="Button" type="Button" parent="." unique_id=1201011333]
-offset_left = -58.0
-offset_top = -121.0
-offset_right = -50.0
-offset_bottom = -113.0
-scale = Vector2(14.520001, 15.040001)
